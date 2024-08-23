@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface UserJpaService {
     List<UserJpa> getAllUsers();
+    int login(String userid, String password);
 }

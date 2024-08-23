@@ -21,4 +21,10 @@ public class UserJpaServiceImpl implements UserJpaService {
     public List<UserJpa> getAllUsers() {
         return userRepository.findAll();
     }
+
+    @Override
+    public int login(String id, String password) {
+        return userRepository.login(id, password);
+    }
+
 }
