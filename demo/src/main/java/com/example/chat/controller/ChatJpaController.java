@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package com.example.chat.controller;
 
-import com.example.demo.model.chatJpa;
-import com.example.demo.service.ChatJpaService;
+import com.example.chat.model.chatJpa;
+import com.example.chat.service.ChatJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +34,8 @@ public class ChatJpaController {
     private final ChatJpaService chatJpaService;
 
     @Autowired
-    public ChatJpaController(ChatJpaService chatJpaService) {
+    public ChatJpaController(ChatJpaService chatJpaService)
+    {
         this.chatJpaService = chatJpaService;
     }
 
@@ -50,33 +51,33 @@ public class ChatJpaController {
 
     // AI 챗봇 호출
     @PostMapping("/getAiMessages")
-    public List<chatJpa> getAiMessages(@RequestBody Map<String, Integer> chatInfo) {
-        int chatId = chatInfo.get("chatId");
+    public List<chatJpa> getAiMessages(@RequestBody Map<String, String> chatInfo) {
+        String userMessage = chatInfo.get("userMessage");
         List<chatJpa> aiMessages = null; // AI 서버 호출해서 메시지 값 받아오는 부분
-        System.out.println("LoginRequest user: " + chatId);
-        System.out.println("chatId: " + chatJpaService.insertChat(chatId));
-
+        System.out.println("user message: " + userMessage);
         return aiMessages;
     }
 
     // 해당 유저아이디의 메시지전송을 눌렀을 때 결과(전송버튼 눌렀을 때 채팅방 및 메시지 정보 insert)
+    // 새로운 메시지 전송
     @PostMapping("/insertChatMessages")
-    public int insertChat(@RequestBody Map<String, Integer> chatInfo) {
-        int chatId = chatInfo.get("chatId");
-        System.out.println("LoginRequest user: " + chatId);
-        System.out.println("chatId: " + chatJpaService.insertChat(chatId));
-
-        return chatJpaService.insertChat(chatId);
+    public int insertChatMessages(@RequestBody chatJpa chat) {
+        return chatJpaService.insertChat(chat);
     }
 
     // 해당 유저아이디 + 채팅방아이디의 채팅방 삭제
+    // 채팅방 삭제
     @PostMapping("/deleteChat")
-    public int deleteChat(@RequestBody Map<String, Integer> chatInfo) {
-        int chatId = chatInfo.get("chatId");
-        System.out.println("LoginRequest user: " + chatId);
-        System.out.println("result login: " + chatJpaService.deleteChat(chatId));
+    public int deleteChat(@RequestBody Map<String, String> chatInfo) {
+        String userId = chatInfo.get("userId");
+        String chatId = chatInfo.get("chatId");
+        return chatJpaService.deleteChat(userId, chatId);
+    }
 
-        return chatJpaService.deleteChat(chatId);
+    // 채팅방 최대 번호 가져오기
+    @GetMapping("/getMaxChatId")
+    public String getMaxChatId(@RequestParam("userId") String userId) {
+        return chatJpaService.getMaxChatId(userId);
     }
 
 }
