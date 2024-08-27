@@ -1,9 +1,6 @@
-package com.example.chat.model;
+package com.example.demo.chat.model;
 
 import jakarta.persistence.*;
-
-import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "chat_messages")
@@ -13,10 +10,10 @@ public class chatJpa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private String userId;
-    private String chatId;
+    private Long chatId;
     private String messageId;
     private String chatName;
-    private List<Map<String, String>> textMessage;
+    private String textMessage;
     private String imgMessage;
     private String isImage;
     private String isUser;
@@ -30,11 +27,11 @@ public class chatJpa {
         this.userId = userId;
     }
 
-    public String getChatId() {
+    public Long getChatId() {
         return chatId;
     }
 
-    public void setChatId(String chatId) {
+    public void setChatId(Long chatId) {
         this.chatId = chatId;
     }
 
@@ -54,11 +51,11 @@ public class chatJpa {
         this.chatName = chatName;
     }
 
-    public List<Map<String, String>> getTextMessage() {
+    public String getTextMessage() {
         return textMessage;
     }
 
-    public void setTextMessage(List<Map<String, String>> textMessage) {
+    public void setTextMessage(String textMessage) {
         this.textMessage = textMessage;
     }
 

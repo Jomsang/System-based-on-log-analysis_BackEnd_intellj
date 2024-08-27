@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package com.example.demo.login.controller;
 
-import com.example.demo.model.UserJpa;
-import com.example.demo.service.UserJpaService;
+import com.example.demo.login.model.UserJpa;
+import com.example.demo.login.service.UserJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

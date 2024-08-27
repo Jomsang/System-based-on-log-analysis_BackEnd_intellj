@@ -1,9 +1,10 @@
-package com.example.chat.controller;
+package com.example.demo.chat.controller;
 
-import com.example.chat.model.chatJpa;
-import com.example.chat.service.ChatJpaService;
+import com.example.demo.chat.model.chatJpa;
+import com.example.demo.chat.service.ChatJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.chat.dto.ChatDto;
 
 import java.util.List;
 import java.util.Map;
@@ -38,10 +39,15 @@ public class ChatJpaController {
     {
         this.chatJpaService = chatJpaService;
     }
+    @PostMapping("/testApi")
+    public String testApi(@RequestBody String testStr) {
+        System.out.println("LoginRequest user: " + testStr);
 
+        return testStr;
+    }
     // 초기 진입시 해당 유저아이디의 채팅방 및 메시지 정보 불러오기
     @PostMapping("/selectChat")
-    public List<chatJpa> selectChat(@RequestBody Map<String, String> userInfo) {
+    public ChatDto selectChat(@RequestBody Map<String, String> userInfo) {
         String userId = userInfo.get("username");
         System.out.println("LoginRequest user: " + userId);
         System.out.println("result login: " + chatJpaService.selectChat(userId));
@@ -61,8 +67,8 @@ public class ChatJpaController {
     // 해당 유저아이디의 메시지전송을 눌렀을 때 결과(전송버튼 눌렀을 때 채팅방 및 메시지 정보 insert)
     // 새로운 메시지 전송
     @PostMapping("/insertChatMessages")
-    public int insertChatMessages(@RequestBody chatJpa chat) {
-        return chatJpaService.insertChat(chat);
+    public void insertChatMessages(@RequestBody ChatDto chat) {
+         chatJpaService.insertChat(chat);
     }
 
     // 해당 유저아이디 + 채팅방아이디의 채팅방 삭제

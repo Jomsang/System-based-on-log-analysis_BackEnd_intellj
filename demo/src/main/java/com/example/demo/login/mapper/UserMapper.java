@@ -1,6 +1,6 @@
-package com.example.demo.mapper;
+package com.example.demo.login.mapper;
 
-import com.example.demo.model.User;
+import com.example.demo.login.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

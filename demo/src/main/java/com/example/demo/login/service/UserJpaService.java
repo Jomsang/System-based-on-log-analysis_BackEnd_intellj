@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.example.demo.login.service;
 
-import com.example.demo.model.UserJpa;
+import com.example.demo.login.model.UserJpa;
 
 import java.util.List;
 
