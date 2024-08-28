@@ -7,22 +7,19 @@ import jakarta.persistence.*;
 public class UserJpa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-    private String username;
     private String userid;
+    private String username;
     private String password;
-    private String status;
+
+    public enum Status {
+        ACTIVE, INACTIVE, SUSPENDED
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status = Status.ACTIVE; // 기본 값을 설정
 
     // Getters and Setters
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -47,11 +44,4 @@ public class UserJpa {
         this.userid = userid;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

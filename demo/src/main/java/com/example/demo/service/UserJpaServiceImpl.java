@@ -27,4 +27,19 @@ public class UserJpaServiceImpl implements UserJpaService {
         return userRepository.login(id, password);
     }
 
+    @Override
+    public int duplicateCheckUser(String id) {
+        return userRepository.duplicateCheckUser(id);
+    }
+
+    @Override
+    public int newUser(UserJpa user) {
+        try {
+            userRepository.save(user);
+            return 1;  // 저장된 유저가 null이 아니면 성공(1), 아니면 실패(0)
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0; // 예외 발생 시 실패(0) 반환
+        }
+    }
 }
