@@ -7,7 +7,7 @@ public class MessageDto {
     private boolean isUser;
     private boolean isImage;
     private boolean isTyping;
-    private Long message_id;
+    private String message_id;
 
     public String getTextMessage() {
         return textMessage;
@@ -49,11 +49,11 @@ public class MessageDto {
         this.isTyping = isTyping;
     }
 
-    public Long getMessage_id() {
+    public String getMessage_id() {
         return message_id;
     }
 
-    public void setMessage_id(Long message_id) {
+    public void setMessage_id(String message_id) {
         this.message_id = message_id;
     }
 

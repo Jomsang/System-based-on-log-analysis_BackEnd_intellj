@@ -1,13 +1,15 @@
 package com.example.demo.chat.repository;
 
 import com.example.demo.chat.model.chatJpa;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ChatRepository extends JpaRepository<chatJpa, Long> {
+public interface ChatRepository extends JpaRepository<chatJpa, String> {
 
     // 특정 유저의 모든 채팅방 조회
     @Query("SELECT c FROM chatJpa c WHERE c.userId = :userId")
@@ -17,6 +19,8 @@ public interface ChatRepository extends JpaRepository<chatJpa, Long> {
     // save() 메서드는 JpaRepository가 기본으로 제공
 
     // 채팅방 삭제
+    @Transactional
+    @Modifying
     @Query("DELETE FROM chatJpa c WHERE c.userId = :userId AND c.chatId = :chatId")
     int deleteChat(@Param("userId") String userId, @Param("chatId") String chatId);
 

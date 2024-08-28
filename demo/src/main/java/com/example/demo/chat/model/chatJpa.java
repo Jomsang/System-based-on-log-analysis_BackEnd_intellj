@@ -7,17 +7,16 @@ import jakarta.persistence.*;
 public class chatJpa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userId;
     private Long chatId;
     private String messageId;
     private String chatName;
     private String textMessage;
     private String imgMessage;
-    private String isImage;
-    private String isUser;
-    private String isTyping;
+    private Boolean isImage;
+    private Boolean isUser;
+    private Boolean isTyping;
 
     public String getUserId() {
         return userId;
@@ -67,27 +66,27 @@ public class chatJpa {
         this.imgMessage = imgMessage;
     }
 
-    public String getIsImage() {
+    public Boolean getIsImage() {
         return isImage;
     }
 
-    public void setIsImage(String isImage) {
+    public void setIsImage(Boolean isImage) {
         this.isImage = isImage;
     }
 
-    public String getIsUser() {
+    public Boolean getIsUser() {
         return isUser;
     }
 
-    public void setIsUser(String isUser) {
+    public void setIsUser(Boolean isUser) {
         this.isUser = isUser;
     }
 
-    public String getIsTyping() {
+    public Boolean getIsTyping() {
         return isTyping;
     }
 
-    public void setIsTyping(String isTyping) {
+    public void setIsTyping(Boolean isTyping) {
         this.isTyping = isTyping;
     }
 }
