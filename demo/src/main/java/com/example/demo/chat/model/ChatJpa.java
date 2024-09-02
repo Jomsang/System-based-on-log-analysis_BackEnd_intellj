@@ -4,12 +4,16 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "chat_messages")
-public class chatJpa {
+@IdClass(ChatMessageId.class)
+
+public class ChatJpa {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userId;
+    @Id
     private Long chatId;
+    @Id
     private String messageId;
     private String chatName;
     private String textMessage;
