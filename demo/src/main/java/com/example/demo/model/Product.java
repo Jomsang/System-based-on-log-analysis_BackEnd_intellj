@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.sql.Date;
 
 @Entity
-@Table(name = "products")
+@Table(name = "Product")
 public class Product {
 
     @Id
