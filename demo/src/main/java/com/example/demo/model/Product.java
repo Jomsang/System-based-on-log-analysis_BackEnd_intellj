@@ -1,10 +1,9 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Product")
@@ -14,52 +13,47 @@ public class Product {
     @Column(name = "MDL_CD", length = 10, nullable = false)
     private String mdlCd;
 
-    @Column(name = "MDL_NM", length = 10)
+    @Column(name = "MDL_NM", length = 200, nullable = false)
     private String mdlNm;
 
-    @Column(name = "IMG_PATH", length = 100)
+    @Column(name = "CTG_ID", length = 30, nullable = false)
+    private String ctgId;
+
+    @Column(name = "IMG_PATH", length = 300)
     private String imgPath;
 
-    @Column(name = "IMG_NM", length = 10)
+    @Column(name = "IMG_NM", length = 300)
     private String imgNm;
 
-    @Column(name = "MDL_DETAIL", length = 10)
+    @Column(name = "MDL_COLOR", length = 100)
+    private String mdlColor;
+
+    @Column(name = "MDL_DETAIL", length = 1000)
     private String mdlDetail;
 
-    @Column(name = "VILD_STRT_DT")
-    @Temporal(TemporalType.DATE)
-    private Date vildStrtDt;
+    @Column(name = "VLID_STRT_DT", nullable = false)
+    private LocalDate vildStrtDt;
 
-    @Column(name = "VILD_END_DT")
-    @Temporal(TemporalType.DATE)
-    private Date vildEndDt;
+    @Column(name = "VLID_END_DT", nullable = false)
+    private LocalDate vildEndDt;
 
-    @Setter
-    @Getter
-    @Column(name = "COST")
-    private Integer cost;
+    @Column(name = "COST", nullable = false)
+    private int cost;
 
-    @Column(name = "DEL_YN", length = 1)
+    @Column(name = "DEL_YN", length = 1, nullable = false)
     private String delYn;
 
-    @Column(name = "FRST_REG_USER_ID", length = 10)
+    @Column(name = "FRST_REG_USER_ID", length = 10, nullable = false)
     private String frstRegUserId;
 
-    @Column(name = "FRST_REG_DT")
-    @Temporal(TemporalType.DATE)
-    private Date frstRegDt;
+    @Column(name = "FRST_REG_DATE", nullable = false)
+    private LocalDateTime frstRegDate;
 
-    @Setter
-    @Getter
-    @Column(name = "LAST_MOD_USER_ID", length = 10)
+    @Column(name = "LAST_MOD_USER_ID", length = 10, nullable = false)
     private String lastModUserId;
 
-    @Column(name = "LAST_MOD_DT")
-    @Temporal(TemporalType.DATE)
-    private Date lastModDt;
-
-    @Column(name = "CTG_ID", length = 10)
-    private String mdlType;
+    @Column(name = "LAST_MOD_DATE", nullable = false)
+    private LocalDateTime lastModDate;
 
     // Getters and Setters
 
@@ -67,95 +61,119 @@ public class Product {
         return mdlCd;
     }
 
-    public void setModelCode(String modelCode) {
-        this.mdlCd = modelCode;
+    public void setModelCode(String mdlCd) {
+        this.mdlCd = mdlCd;
     }
 
     public String getModelName() {
         return mdlNm;
     }
 
-    public void setModelName(String modelName) {
-        this.mdlNm = modelName;
+    public void setModelName(String mdlNm) {
+        this.mdlNm = mdlNm;
+    }
+
+    public String getCategoryId() {
+        return ctgId;
+    }
+
+    public void setCategoryId(String ctgId) {
+        this.ctgId = ctgId;
     }
 
     public String getImagePath() {
         return imgPath;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imgPath = imagePath;
+    public void setImagePath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
     public String getImageName() {
         return imgNm;
     }
 
-    public void setImageName(String imageName) {
-        this.imgNm = imageName;
+    public void setImageName(String imgNm) {
+        this.imgNm = imgNm;
+    }
+
+    public String getModelColor() {
+        return mdlColor;
+    }
+
+    public void setModelColor(String mdlColor) {
+        this.mdlColor = mdlColor;
     }
 
     public String getModelDetail() {
         return mdlDetail;
     }
 
-    public void setModelDetail(String modelDetail) {
-        this.mdlDetail = modelDetail;
+    public void setModelDetail(String mdlDetail) {
+        this.mdlDetail = mdlDetail;
     }
 
-    public Date getValidStartDate() {
+    public LocalDate getValidStartDate() {
         return vildStrtDt;
     }
 
-    public void setValidStartDate(Date validStartDate) {
-        this.vildStrtDt = validStartDate;
+    public void setValidStartDate(LocalDate vildStrtDt) {
+        this.vildStrtDt = vildStrtDt;
     }
 
-    public Date getValidEndDate() {
+    public LocalDate getValidEndDate() {
         return vildEndDt;
     }
 
-    public void setValidEndDate(Date validEndDate) {
-        this.vildEndDt = validEndDate;
+    public void setValidEndDate(LocalDate vildEndDt) {
+        this.vildEndDt = vildEndDt;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public String getDeleteYn() {
         return delYn;
     }
 
-    public void setDeleteYn(String deleteYn) {
-        this.delYn = deleteYn;
+    public void setDeleteYn(String delYn) {
+        this.delYn = delYn;
     }
 
-    public String getFirstRegUserId() {
+    public String getFirstRegisteredUserId() {
         return frstRegUserId;
     }
 
-    public void setFirstRegUserId(String firstRegUserId) {
-        this.frstRegUserId = firstRegUserId;
+    public void setFirstRegisteredUserId(String frstRegUserId) {
+        this.frstRegUserId = frstRegUserId;
     }
 
-    public Date getFirstRegDate() {
-        return frstRegDt;
+    public LocalDateTime getFirstRegisteredDate() {
+        return frstRegDate;
     }
 
-    public void setFirstRegDate(Date firstRegDate) {
-        this.frstRegDt = firstRegDate;
+    public void setFirstRegisteredDate(LocalDateTime frstRegDate) {
+        this.frstRegDate = frstRegDate;
     }
 
-    public Date getLastModDate() {
-        return lastModDt;
+    public String getLastModifiedUserId() {
+        return lastModUserId;
     }
 
-    public void setLastModDate(Date lastModDate) {
-        this.lastModDt = lastModDate;
+    public void setLastModifiedUserId(String lastModUserId) {
+        this.lastModUserId = lastModUserId;
     }
 
-    public String getModelType() {
-        return mdlType;
+    public LocalDateTime getLastModifiedDate() {
+        return lastModDate;
     }
 
-    public void setModelType(String modelType) {
-        this.mdlType = modelType;
+    public void setLastModifiedDate(LocalDateTime lastModDate) {
+        this.lastModDate = lastModDate;
     }
 }

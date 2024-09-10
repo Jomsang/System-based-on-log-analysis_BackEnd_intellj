@@ -19,12 +19,12 @@ public class ModelController {
         this.modelService = modelService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public List<Product> getAllModelList() {
         return modelService.getAllModelList();
     }
 
-    @GetMapping("/{category}")
+    @GetMapping("/category/{category}")
     public List<Product> getModelList(@PathVariable(name = "category") String cat) {
         return modelService.getModelList(cat);
     }
