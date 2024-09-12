@@ -1,7 +1,7 @@
 package com.example.demo.goodsDetail.service;
 
 import com.example.demo.goodsDetail.repository.GoodsDetailRepository;
-import com.example.demo.model.Product;
+import com.example.demo.modelList.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
