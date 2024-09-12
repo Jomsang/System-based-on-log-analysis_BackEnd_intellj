@@ -1,6 +1,5 @@
-package com.example.demo.repository;
+package com.example.demo.modelList;
 
-import com.example.demo.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
