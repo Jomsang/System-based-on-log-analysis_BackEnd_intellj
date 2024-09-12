@@ -17,6 +17,8 @@ public class ChatJpa {
     private String messageId;
     private String chatName;
     private String textMessage;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String imgMessage;
     private Boolean isImage;
     private Boolean isUser;
