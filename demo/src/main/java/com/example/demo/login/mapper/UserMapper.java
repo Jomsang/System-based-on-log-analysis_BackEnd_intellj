@@ -1,4 +1,4 @@
-package com.example.demo.mapper;
+package com.example.demo.login.mapper;
 
 import com.example.demo.model.UserMb;
 import org.apache.ibatis.annotations.Mapper;

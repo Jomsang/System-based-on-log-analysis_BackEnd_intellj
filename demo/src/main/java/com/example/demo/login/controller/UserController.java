@@ -1,7 +1,7 @@
 package com.example.demo.login.controller;
 
 import com.example.demo.login.model.User;
-import com.example.demo.login.service.UserService;
+import com.example.demo.login.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +14,11 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    private final UserServiceImpl userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
