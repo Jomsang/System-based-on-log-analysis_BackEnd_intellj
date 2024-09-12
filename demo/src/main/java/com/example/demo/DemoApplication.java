@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
-@MapperScan("com.example.demo.mapper") // MyBatis 매퍼 인터페이스 패키지 지정
+@MapperScan("com.example.demo.login.mapper") // MyBatis 매퍼 인터페이스 패키지 지정
 public class DemoApplication {
 
 	public static void main(String[] args) {
