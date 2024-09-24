@@ -60,8 +60,12 @@ public class ChatJpaController {
     // AI 챗봇 호출
     @PostMapping("/getAiMessages")
     public ResponseEntity<List<Map<String, String>>> getAiMessages(@RequestBody Map<String, Object> chatInfo) {
-        String textMessage = chatInfo.get("textMessage").toString();
-        String imageBase64 = chatInfo.get("imageMessage").toString(); // base64 이미지 데이터
+
+        HashMap<String, String> userMessageObj = (HashMap<String, String>) chatInfo.get("userMessage");
+
+
+        String textMessage = userMessageObj.get("textMessage").toString();
+        String imageBase64 = userMessageObj.get("imgMessage").toString(); // base64 이미지 데이터
 
         // Flask 서버 URL 설정
         String flaskUrl = "http://localhost:5000/chat";
@@ -71,7 +75,7 @@ public class ChatJpaController {
         // MultiValueMap에 텍스트 메시지와 이미지를 담아 Flask로 전송
         MultiValueMap<String, Object> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("textMessage", textMessage);
-        requestBody.add("imageMessage", imageBase64);
+        requestBody.add("imgMessage", imageBase64);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
