@@ -3,11 +3,16 @@ package com.example.demo.chat.controller;
 import com.example.demo.chat.dto.MessageDto;
 import com.example.demo.chat.service.ChatJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.chat.dto.ChatDto;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -55,21 +60,47 @@ public class ChatJpaController {
     // AI 챗봇 호출
     @PostMapping("/getAiMessages")
     public ResponseEntity<List<Map<String, String>>> getAiMessages(@RequestBody Map<String, Object> chatInfo) {
-        // userMessage가 Object로 들어올 수 있으므로, String으로 변환 필요
-        Object userMessageObj = chatInfo.get("userMessage");
-        String userMessage = userMessageObj != null ? userMessageObj.toString() : "";
 
-        String aiMessage = "이것은 테스트 AI 메시지 입니다. ";
+        HashMap<String, String> userMessageObj = (HashMap<String, String>) chatInfo.get("userMessage");
 
-        // JSON 응답을 위한 Map 생성
-        Map<String, String> messageMap = new HashMap<>();
-        messageMap.put("textMessage", aiMessage);
 
-        // 응답을 리스트로 보내기 (배열 형태로 응답)
-        List<Map<String, String>> response = new ArrayList<>();
-        response.add(messageMap);
+        String textMessage = userMessageObj.get("textMessage").toString();
+        String imageBase64 = userMessageObj.get("imgMessage").toString(); // base64 이미지 데이터
 
-        return ResponseEntity.ok(response);
+        // Flask 서버 URL 설정
+        String flaskUrl = "http://localhost:5000/chat";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // MultiValueMap에 텍스트 메시지와 이미지를 담아 Flask로 전송
+        MultiValueMap<String, Object> requestBody = new LinkedMultiValueMap<>();
+        requestBody.add("textMessage", textMessage);
+        requestBody.add("imgMessage", imageBase64);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
+
+        try {
+            // Flask 서버로 POST 요청을 보내고 결과를 받음
+            ResponseEntity<Map> response = restTemplate.postForEntity(flaskUrl, requestEntity, Map.class);
+
+            Map<String, String> responseBody = (Map<String, String>) response.getBody();
+
+            // 응답을 List<Map<String, String>>로 변환하여 클라이언트에 전달
+            List<Map<String, String>> responseList = new ArrayList<>();
+            responseList.add(responseBody);
+
+            return ResponseEntity.ok(responseList);
+        } catch (Exception e) {
+            // 에러 발생 시 에러 메시지 반환
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Flask 서버와의 통신 오류: " + e.getMessage());
+            List<Map<String, String>> errorList = new ArrayList<>();
+            errorList.add(errorResponse);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorList);
+        }
     }
 
     // 해당 유저아이디의 메시지전송을 눌렀을 때 결과(전송버튼 눌렀을 때 채팅방 및 메시지 정보 insert)
