@@ -14,8 +14,8 @@ public interface ModelRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p")
     List<Product> getAllModelList();
 
-    @Query("SELECT p FROM Product p WHERE (:category IS NULL OR p.ctgId = :category)")
-    List<Product> getModelList(@Param("cat") String category);
+    @Query("SELECT p FROM Product p WHERE p.ctgId = :categoryId")
+    List<Product> getModelList(@Param("categoryId") String categoryId);
 
     @Query("SELECT p FROM Product p WHERE p.mdlCd LIKE %:modelCode% OR p.mdlNm LIKE %:modelCode% OR p.mdlDetail LIKE %:modelCode%")
     List<Product> getSearchModelList(@Param("modelCode") String modelCode);
