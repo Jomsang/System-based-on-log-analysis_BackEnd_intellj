@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/modelDetail")
-@CrossOrigin(origins ="http://localhost:3000")
+@CrossOrigin()
 public class GoodsDetailController {
 
     @Autowired

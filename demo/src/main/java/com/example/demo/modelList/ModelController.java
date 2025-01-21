@@ -7,7 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/modelList")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin()
 public class ModelController {
 
     private final ModelService modelService;

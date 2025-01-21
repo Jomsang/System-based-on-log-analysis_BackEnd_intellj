@@ -12,7 +12,6 @@ import java.util.Date;
 
 @Entity
 @Data
-//@Data
 @IdClass(LikeId.class)
 @Table(name = "LIKE_MS")
 @AllArgsConstructor

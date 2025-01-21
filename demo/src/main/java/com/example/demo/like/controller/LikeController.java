@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/like")
-@CrossOrigin(origins ="http://localhost:3000")
+@CrossOrigin()
 public class LikeController {
     @Autowired
     private LikeServiceImpl likeServiceImpl;

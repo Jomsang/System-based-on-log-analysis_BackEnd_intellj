@@ -35,7 +35,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/chatJpa")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin()
 public class ChatJpaController {
 
     private final ChatJpaService chatJpaService;
@@ -68,7 +68,7 @@ public class ChatJpaController {
         String imageBase64 = userMessageObj.get("imgMessage").toString(); // base64 이미지 데이터
 
         // Flask 서버 URL 설정
-        String flaskUrl = "http://localhost:5000/chat";
+        String flaskUrl = "http://3.35.174.24:5000/chat";
 
         RestTemplate restTemplate = new RestTemplate();
 
