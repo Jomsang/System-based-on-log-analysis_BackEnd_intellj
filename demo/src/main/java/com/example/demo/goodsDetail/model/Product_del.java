@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 //@Data
 @IdClass(LikeId.class)
-@Table(name = "PRODUCT")
+@Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product_del {

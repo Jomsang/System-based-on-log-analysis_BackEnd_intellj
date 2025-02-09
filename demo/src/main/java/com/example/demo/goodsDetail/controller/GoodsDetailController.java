@@ -22,6 +22,7 @@ public class GoodsDetailController {
 
     @GetMapping("/{mdlCd}")
     public Map<String, Object> selectModelByPrdCode(@PathVariable String mdlCd) {
+        System.out.println("###################PIN02###################");
         Map<String, Object> returnMap = new HashMap<>();
         Product product = new Product();
         List<Product> relatePrd = new ArrayList<>();

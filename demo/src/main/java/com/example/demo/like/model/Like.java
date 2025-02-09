@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 @Data
 @IdClass(LikeId.class)
-@Table(name = "LIKE_MS")
+@Table(name = "like_ms")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Like {

@@ -18,6 +18,7 @@ public class MainController {
     private final BestProductService bestProductService;
 
     public MainController(BestProductService bestProductService) {
+        System.out.println("###################PIN01###################");
         this.bestProductService = bestProductService;
     }
 
